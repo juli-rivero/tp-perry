@@ -7,41 +7,35 @@
 #define MAX_HERRAMIENTAS 100
 #define MAX_FAMILIARES 10
 
-typedef struct coordenada
-{
+typedef struct coordenada {
     int fil;
     int col;
 } coordenada_t;
 
-typedef struct personaje
-{
+typedef struct personaje {
     int vida;
     int energia;
     bool camuflado;
     coordenada_t posicion;
 } personaje_t;
 
-typedef struct bomba
-{
+typedef struct bomba {
     coordenada_t posicion;
     int timer;
     bool desactivada;
 } bomba_t;
 
-typedef struct herramienta
-{
+typedef struct herramienta {
     coordenada_t posicion;
     char tipo;
 } herramienta_t;
 
-typedef struct familiar
-{
+typedef struct familiar {
     coordenada_t posicion;
     char inicial_nombre;
 } familiar_t;
 
-typedef struct juego
-{
+typedef struct juego {
     personaje_t perry;
     bomba_t bombas[MAX_BOMBAS];
     int tope_bombas;
@@ -52,17 +46,16 @@ typedef struct juego
 } juego_t;
 
 /*
- * Inicializará el juego, cargando toda la información inicial de Perry, los obstáculos, las
-herramientas y la familia Flynn.
-*/
-void inicializar_juego(juego_t *juego);
+ * Inicializará el juego, cargando toda la información inicial de Perry, los obstáculos, las herramientas y la familia Flynn.
+ */
+void inicializar_juego(juego_t* juego);
 
 /*
- * Realizará la acción recibida por parámetro.
+ * Realizará la acción recibida por parámetro. 
  * La acción recibida deberá ser válida.
  * Solo se podrá mover a Perry y camuflarlo.
  */
-void realizar_jugada(juego_t *juego, char accion);
+void realizar_jugada(juego_t* juego, char accion);
 
 /*
  * Imprime el juego por pantalla

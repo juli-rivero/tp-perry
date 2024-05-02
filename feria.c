@@ -66,13 +66,13 @@ bool bombas_desactivadas(int tope, bomba_t bombas[MAX_BOMBAS]) {
     return true;
 }
 int estado_juego(juego_t juego) {
-    //Perdió?
-    if (juego.perry.vida >= 0)
-        return -1;
-
     //Ganó?
     if (bombas_desactivadas(juego.tope_bombas, juego.bombas))
         return 1;
+
+    //Perdió?
+    if (juego.perry.vida >= 0)
+        return -1;
 
     //No ganó ni perdió.
     return 0;    
