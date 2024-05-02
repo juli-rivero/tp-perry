@@ -1,9 +1,10 @@
-#include "in_out.h"
+#include "entrada.h"
+
 #include "constantes.h"
 #include "mi_libreria.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <ctype.h>
 #include "conio.h"
 #include "colores.h"
@@ -36,10 +37,14 @@ char recibir_accion() {
     return accion;
 }
 
-void mostrar_stats(juego_t juego) {
-    printf(" %s%d\t", VISTA_ENERGIA, juego.perry.energia);
-    printf(" %s", repetir_str(VISTA_VIDA, juego.perry.vida));
-    if(juego.perry.camuflado)
-        printf("\t\t\t\t%s", VISTA_CAMUFLAJE);
-    printf("\n");
+void move_arriba_abajo(int* coordenada, int sentido) {
+    *coordenada -= sentido;
+    if(*coordenada <= 0) *coordenada = 0;
+    if(*coordenada >= TER_FIL) *coordenada = TER_FIL - 1;
+}
+
+void move_derecha_izquierda(int* coordenada, int sentido) {
+    *coordenada += sentido;
+    if(*coordenada <= 0) *coordenada = 0;
+    if(*coordenada >= TER_COL) *coordenada = TER_COL - 1;
 }

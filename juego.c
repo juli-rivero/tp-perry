@@ -1,5 +1,7 @@
 #include "feria.h"
-#include "in_out.h"
+#include "entrada.h"
+#include "mostrar.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>

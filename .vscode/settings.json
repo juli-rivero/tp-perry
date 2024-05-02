@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "constantes.h": "c",
+        "structs.h": "c",
+        "feria.h": "c",
+        "inicializar.h": "c",
+        "colores.h": "c",
+        "stdlib.h": "c",
+        "colocar_en_terreno.h": "c",
+        "mi_libreria.h": "c"
+    }
+}

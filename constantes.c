@@ -1,6 +1,6 @@
 #include "constantes.h"
 
-//INICIALIZACION
+// INICIALIZACION
     const int I_VIDA = 3;
     const int I_ENERGIA = 100;
     const bool I_CAMUFLADO = false;
@@ -16,38 +16,48 @@
     const int I_CANT_FAMILIA = 3; // Phineas, Ferb y Candace
     // Por más que en feria.h diga que MAX_FAMILIARES es 10, si se quieren agregar más familiares, se debera agregar los respectivos "inicial_nombre" manualmente en feria.c
 
-//ACCIONES
-    // ver en constantes.h
-
+// ACCIONES
+    /* En constantes.h 
+        //Direcciones
+            #define ARRIBA 'W'
+            #define ABAJO 'S'
+            #define DERECHA 'D'
+            #define IZQUIERDA 'A'
+        //Habilidades
+            #define CAMUFLARSE 'Q'
+    */
     const char NO_VALIDO = '-';
 
-//CONVENCIONES - estan como cadena para despues poder usarlos con strcat (y usar colores)
-    //Nombres
+// CONVENCIONES - estan como cadena para despues poder usarlos con strcat (y usar colores)
+    // Nombres
         const char PERRY = 'P';
         const char PHINEAS = 'H';
         const char FERB = 'F';
         const char CANDACE = 'C';
-    //Obstaculos
+    // Obstaculos
         const char BOMBAS = 'B';
-    //Herramientas
+    // Herramientas
         const char SOMBREROS = 'S';
         const char GOLOSINAS = 'G';
 
-//ESTADISTICAS
+// ESTADISTICAS
     char* VISTA_VIDA = "❤";
     char* VISTA_ENERGIA = "⚡";
     char* VISTA_CAMUFLAJE = "ㅛ";
 
-//DETALLES
-    //Para el timer de las bombas
+// DETALLES
+    // Timer de bombas
         const int ADVERT_AMARILLA = 100;
         const int ADVERT_ROJA = 25;
 
-//TERRENO
-    // ver en constantes.h
-
+// TERRENO
+    /* En constantes.h 
+        #define TER_FIL 20
+        #define TER_COL 20
+        #define MAX_NOMBRE 20 //Para poder estelizar un caracter
+    */
     const char VACIO = ' ';
     const char NO_VACIO = '#';
 
-//AUXILIARES
+// AUXILIARES
     const int MAXIMO_BUCLE = 1000;
