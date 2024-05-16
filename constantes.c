@@ -6,8 +6,12 @@
     const bool I_CAMUFLADO = false;
 
     const int I_CANT_BOMBAS = 10; //NO debe superar a MAXBOMBAS de feria.h
-    const int TIEMPO_MIN = 50;
-    const int TIEMPO_MAX = 300;
+    /* En constantes.h 
+    enum Timer_bomba {
+        TIEMPO_MIN = 50,
+        TIEMPO_MAX = 300,
+    };
+    */
 
     const int I_CANT_SOMBREROS = 3; 
     const int I_CANT_GOLOSINAS = 5; 
@@ -18,13 +22,15 @@
 
 // ACCIONES
     /* En constantes.h 
-        //Direcciones
-            #define ARRIBA 'W'
-            #define ABAJO 'S'
-            #define DERECHA 'D'
-            #define IZQUIERDA 'A'
-        //Habilidades
-            #define CAMUFLARSE 'Q'
+    enum Direcciones {
+        ARRIBA = 'W',
+        ABAJO = 'S',
+        DERECHA = 'D',
+        IZQUIERDA = 'A'
+    };
+    enum Habilidades {
+        CAMUFLARSE = 'Q'
+    };
     */
     const char NO_VALIDO = '-';
 
@@ -46,15 +52,17 @@
     char* VISTA_CAMUFLAJE = "ㅛ";
 
 // DETALLES
-    // Timer de bombas
-        const int ADVERT_AMARILLA = 100;
-        const int ADVERT_ROJA = 25;
+    /* En constantes.h 
+    enum Advertencia_timer_bomba {
+        ADVERT_AMARILLA = 100,
+        ADVERT_ROJA = 25
+    }; 
+    */
 
 // TERRENO
     /* En constantes.h 
         #define TER_FIL 20
         #define TER_COL 20
-        #define MAX_NOMBRE 20 //Para poder estelizar un caracter
     */
     const char VACIO = ' ';
     const char NO_VACIO = '#';

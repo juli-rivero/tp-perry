@@ -2,12 +2,8 @@
 #define COLORES_H
 
 #define STYLE_UNDERLINE    "\033[4m"
-#define STYLE_NO_UNDERLINE "\033[24m"
-
 #define STYLE_BOLD         "\033[1m"
-#define STYLE_NO_BOLD      "\033[22m"
 
-#define RESET_COLOR    "\x1b[0m"
 #define NEGRO_T        "\x1b[30m"
 #define NEGRO_F        "\x1b[40m"
 #define ROJO_T     "\x1b[31m"
@@ -24,5 +20,7 @@
 #define CYAN_F     "\x1b[46m"
 #define BLANCO_T   "\x1b[37m"
 #define BLANCO_F   "\x1b[47m"
+
+#define RESET    "\x1b[0m"
 
 #endif /* COLORES_H */

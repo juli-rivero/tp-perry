@@ -12,11 +12,11 @@
 char recibir_accion() {
     int entrada;
     do {
-        //accion = (char) getchar();
+        //entrada = getchar();
         entrada = c_getche();
     } while (entrada == '\n' || entrada == EOF); 
-    system("clear");
     char accion = (char) entrada;
+    system("clear");
     switch (toupper(accion)) {
         case ARRIBA:
         case ABAJO:
@@ -31,19 +31,19 @@ char recibir_accion() {
             printf("\t%c (ARRIBA) - %c (ABAJO) - %c (DERECHA) - %c (IZQUIERDA).\n", ARRIBA, ABAJO, DERECHA, IZQUIERDA);
             printf("Para habilidades presione:\n\t%c (CAMUFARSE)\n", CAMUFLARSE);
             accion = NO_VALIDO;
-            printf("\v" RESET_COLOR);
+            printf("\v" RESET);
             break;
     }
     return accion;
 }
 
-void move_arriba_abajo(int* coordenada, int sentido) {
+void mover_arriba_abajo(int* coordenada, int sentido) {
     *coordenada -= sentido;
     if(*coordenada <= 0) *coordenada = 0;
     if(*coordenada >= TER_FIL) *coordenada = TER_FIL - 1;
 }
 
-void move_derecha_izquierda(int* coordenada, int sentido) {
+void mover_derecha_izquierda(int* coordenada, int sentido) {
     *coordenada += sentido;
     if(*coordenada <= 0) *coordenada = 0;
     if(*coordenada >= TER_COL) *coordenada = TER_COL - 1;

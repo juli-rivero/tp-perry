@@ -11,12 +11,12 @@ char recibir_accion();
 //  coordenada: columna o fila.
 //  sentido: +1 para arriba, -1 para abajo.
 //POST: Se cambia la coordenada sin salirse del terreno.
-void move_arriba_abajo(int* coordenada, int sentido);
+void mover_arriba_abajo(int* coordenada, int sentido);
 
 //PRE: 
 //  coordenada: columna o fila.
 //  sentido: +1 para derecha, -1 para izquierda.
 //POST: Se cambia la coordenada sin salirse del terreno.
-void move_derecha_izquierda(int* coordenada, int sentido);
+void mover_derecha_izquierda(int* coordenada, int sentido);
 
 #endif /* ENTRADA_H */

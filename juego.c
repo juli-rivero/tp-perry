@@ -13,7 +13,7 @@ int main() {
     juego_t juego;
     inicializar_juego(&juego);
     do {
-        mostrar_stats(juego);
+        mostrar_stats(juego.perry);
         imprimir_terreno(juego);
         char accion = recibir_accion();
         realizar_jugada(&juego, accion);

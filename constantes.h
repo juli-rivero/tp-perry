@@ -8,20 +8,25 @@
     extern const int I_ENERGIA;
     extern const bool I_CAMUFLADO;
     extern const int I_CANT_BOMBAS;
-    extern const int TIEMPO_MIN;
-    extern const int TIEMPO_MAX;
+    enum Timer_bomba {
+        TIEMPO_MIN = 50,
+        TIEMPO_MAX = 300,
+    };
     extern const int I_CANT_SOMBREROS;
     extern const int I_CANT_GOLOSINAS;
     extern const int I_CANT_FAMILIA;
 
-//ACCIONES - con #define para que puedan usarse en el switch.
-    //Direcciones
-        #define ARRIBA 'W'
-        #define ABAJO 'S'
-        #define DERECHA 'D'
-        #define IZQUIERDA 'A'
-    //Habilidades
-        #define CAMUFLARSE 'Q'
+//ACCIONES - con 'const enum' para que puedan usarse en el switch.
+    enum Direcciones {
+        ARRIBA = 'W',
+        ABAJO = 'S',
+        DERECHA = 'D',
+        IZQUIERDA = 'A',
+    };
+
+    enum Habilidades {
+        CAMUFLARSE = 'Q',
+    };
     extern const char NO_VALIDO;
 
 //CONVENCIONES
@@ -42,16 +47,23 @@
     extern char* VISTA_CAMUFLAJE;
 
 //DETALLES
-    //Para el timer de las bombas
-        extern const int ADVERT_AMARILLA;
-        extern const int ADVERT_ROJA;
+    enum Advertencia_timer_bomba {
+        ADVERT_AMARILLA = 100,
+        ADVERT_ROJA = 25
+    };
 
 //TERRENO
     #define TER_FIL 20
     #define TER_COL 20
-    #define MAX_NOMBRE 20 //Para poder estelizar un caracter
     extern const char VACIO;
     extern const char NO_VACIO;
+
+//ESTADO JUEGO
+    enum Estado_juego {
+        GAME_OVER = -1,
+        EN_JUEGO = 0,
+        GANADO = 1
+    };
 
 //AUXILIARES
     extern const int MAXIMO_BUCLE;

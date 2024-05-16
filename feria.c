@@ -2,6 +2,7 @@
 
 #include "constantes.h"
 #include "terreno.h"
+#include "tipos_de_datos.h"
 #include "inicializar.h"
 #include "colocar_en_terreno.h"
 #include "entrada.h"
@@ -11,7 +12,7 @@
 
 void inicializar_juego(juego_t *juego)
 {
-    char terreno[TER_FIL][TER_COL][MAX_NOMBRE];
+    styled_char terreno[TER_FIL][TER_COL];
     vaciar_terreno(terreno);
 
     juego->perry = inicializar_personaje(terreno);
@@ -23,7 +24,7 @@ void inicializar_juego(juego_t *juego)
 
 void imprimir_terreno(juego_t juego)
 {
-    char terreno[TER_FIL][TER_COL][MAX_NOMBRE];
+    styled_char terreno[TER_FIL][TER_COL];
     vaciar_terreno(terreno);
     
     colocar_bombas(terreno, juego.tope_bombas, juego.bombas);
@@ -39,16 +40,16 @@ void realizar_jugada(juego_t *juego, char accion) {
     switch (toupper(accion))
     {
     case ARRIBA:
-        move_arriba_abajo(&(perry->posicion.fil), +1);
+        mover_arriba_abajo(&(perry->posicion.fil), +1);
         break;
     case ABAJO:
-        move_arriba_abajo(&(perry->posicion.fil), -1);
+        mover_arriba_abajo(&(perry->posicion.fil), -1);
         break;
     case DERECHA:
-        move_derecha_izquierda(&(perry->posicion.col), +1);
+        mover_derecha_izquierda(&(perry->posicion.col), +1);
         break;
     case IZQUIERDA:
-        move_derecha_izquierda(&(perry->posicion.col), -1);
+        mover_derecha_izquierda(&(perry->posicion.col), -1);
         break;
     case CAMUFLARSE:
         perry->camuflado = !perry->camuflado;
@@ -68,12 +69,12 @@ bool bombas_desactivadas(int tope, bomba_t bombas[MAX_BOMBAS]) {
 int estado_juego(juego_t juego) {
     //Ganó?
     if (bombas_desactivadas(juego.tope_bombas, juego.bombas))
-        return 1;
+        return GANADO;
 
     //Perdió?
-    if (juego.perry.vida >= 0)
-        return -1;
+    if (juego.perry.vida <= 0)
+        return GAME_OVER;
 
     //No ganó ni perdió.
-    return 0;    
+    return EN_JUEGO;    
 }
