@@ -2,13 +2,58 @@
 
 #include "mi_libreria.h"
 
+#include "colores.h"
 #include <string.h>
+#include <stdio.h>
+
+bool son_pos_iguales(coordenada_t pos1, coordenada_t pos2) {
+    return (pos1.fil == pos2.fil && pos1.col == pos2.col);
+}
+bool esta_disponible2(juego_t juego, coordenada_t posicion) {
+    if (son_pos_iguales(juego.perry.posicion, posicion))
+        return false;
+
+    for (int i = 0; i < juego.tope_bombas; i++)
+        if(son_pos_iguales(juego.bombas[i].posicion, posicion))
+            return false;
+
+    for (int i = 0; i < juego.tope_herramientas; i++)
+        if(son_pos_iguales(juego.herramientas[i].posicion, posicion))
+            return false;
+    
+    for (int i = 0; i < juego.tope_familiares; i++)
+        if(son_pos_iguales(juego.familiares[i].posicion, posicion))
+            return false;
+    
+    return true;
+}
+coordenada_t agarrar_rand_posicion2(juego_t juego) {
+    coordenada_t posicion;
+    int contador = 0;
+    do {
+        posicion.fil = rand_index(TER_FIL);
+        posicion.col = rand_index(TER_COL);
+    } while (!esta_disponible2(juego, posicion) && ++contador < MAXIMO_BUCLE);
+
+    if (contador >= MAXIMO_BUCLE)  {
+        printf(ROJO_T"Terreno insuficiente para la cantidad de objetos\n"RESET);
+        posicion.fil = -1; 
+        posicion.col = -1; 
+    }
+    return posicion;
+}
+
+void vaciar_terreno(styled_char terreno[TER_FIL][TER_COL]) {
+    for (int i = 0; i < TER_FIL; i++)
+        for (int j=0; j<TER_COL;j++)
+            strcpy(terreno[i][j], (styled_char){VACIO});
+}
 
 // POST: verifica que este vacio el terreno en la posicion recibida.
-bool esta_disponible(char terreno[TER_FIL][TER_COL][MAX_NOMBRE], coordenada_t posicion) {
-    return terreno[posicion.fil][posicion.col][0] == VACIO;
+bool esta_disponible(styled_char terreno[TER_FIL][TER_COL], coordenada_t posicion) {
+    return !strcmp(terreno[posicion.fil][posicion.col], (styled_char) {VACIO});
 }
-coordenada_t agarrar_rand_posicion(char terreno[TER_FIL][TER_COL][MAX_NOMBRE]) {
+coordenada_t agarrar_rand_posicion(styled_char terreno[TER_FIL][TER_COL]) {
     coordenada_t posicion;
     int contador = 0;
     do {
@@ -16,20 +61,16 @@ coordenada_t agarrar_rand_posicion(char terreno[TER_FIL][TER_COL][MAX_NOMBRE]) {
         posicion.col = rand_index(TER_COL);
     } while (!esta_disponible(terreno, posicion) && ++contador < MAXIMO_BUCLE);
 
-    if (contador >= MAXIMO_BUCLE)  { //No hallo espacio disponible.
+    if (contador >= MAXIMO_BUCLE)  {
+        printf(ROJO_T"Terreno insuficiente para la cantidad de objetos\n"RESET);
         posicion.fil = -1; 
         posicion.col = -1; 
     } else {
-        strcpy(terreno[posicion.fil][posicion.col], (char[MAX_NOMBRE]) {NO_VACIO, '\0'});
+        strcpy(terreno[posicion.fil][posicion.col], (styled_char) {NO_VACIO});
     }
     return posicion;
 }
 
-void vaciar_terreno(char terreno[TER_FIL][TER_COL][MAX_NOMBRE]) {
-    for (int i = 0; i < TER_FIL; i++)
-        for (int j=0; j<TER_COL;j++)
-            strcpy(terreno[i][j], (char[MAX_NOMBRE]){VACIO, '\0'});
-}
 
 
 
