@@ -3,52 +3,61 @@
 #include "terreno.h"
 #include "mi_libreria.h"
 
-personaje_t inicializar_personaje(styled_char terreno[TER_FIL][TER_COL]) {
+personaje_t inicializar_personaje() {
     return (personaje_t) {
         I_VIDA,
         I_ENERGIA,
         I_CAMUFLADO,
-        agarrar_rand_posicion(terreno)
+        {rand_index(TER_FIL), rand_index(TER_COL)}
     };
 }
 
-bomba_t inicializar_bomba(styled_char terreno[TER_FIL][TER_COL]) {
+bomba_t inicializar_bomba(juego_t juego) {
     return (bomba_t) {
-        agarrar_rand_posicion(terreno),
+        agarrar_rand_posicion(juego),
         rand_minI_maxI(TIEMPO_MIN, TIEMPO_MAX),
         false
     };
 }
-void inicializar_bombas(styled_char terreno[TER_FIL][TER_COL], juego_t* juego) {
-    juego->tope_bombas = I_CANT_BOMBAS;
-    for (int i = 0; i < juego->tope_bombas; i++) {
-        juego->bombas[i] = inicializar_bomba(terreno);
-    }
+void inicializar_bombas(juego_t* juego) {
+    int* tope = &(juego->tope_bombas);
+    for (*tope = 0; *tope < I_CANT_BOMBAS; (*tope)++)
+        juego->bombas[*tope] = inicializar_bomba(*juego);
 }
 
-herramienta_t inicializar_herramienta(styled_char terreno[TER_FIL][TER_COL], char tipo) {
+herramienta_t inicializar_herramienta(juego_t juego, char tipo) {
     return (herramienta_t) {
-        agarrar_rand_posicion(terreno),
+        agarrar_rand_posicion(juego),
         tipo
     };
 
 }
-void inicializar_herramientas(styled_char terreno[TER_FIL][TER_COL], juego_t* juego) {
-    juego->tope_herramientas = I_CANT_SOMBREROS + I_CANT_GOLOSINAS;
-    for (int i = 0; i < juego->tope_herramientas; i++)
-        juego->herramientas[i] = 
-            inicializar_herramienta(terreno, (i < I_CANT_SOMBREROS) ? SOMBREROS : GOLOSINAS);
+void inicializar_herramientas(juego_t* juego) {
+    int* tope = &(juego->tope_herramientas);
+    for (*tope = 0; *tope < I_CANT_SOMBREROS + I_CANT_GOLOSINAS; (*tope)++)
+        juego->herramientas[*tope] = 
+            inicializar_herramienta(*juego, (*tope < I_CANT_SOMBREROS) ? SOMBREROS : GOLOSINAS);
 }
 
-familiar_t inicializar_familiar(styled_char terreno[TER_FIL][TER_COL], char inicial_nombre) {
+familiar_t inicializar_familiar(juego_t juego, char sentido, char inicial_nombre) {
     return (familiar_t) {
-        agarrar_rand_posicion(terreno),
+        agarrar_rand_posicion(juego),
+        sentido,
         inicial_nombre
     };
 }
-void inicializar_familiares(styled_char terreno[TER_FIL][TER_COL], juego_t* juego) {
-    juego->tope_familiares = I_CANT_FAMILIA;
-    juego->familiares[0] = inicializar_familiar(terreno, PHINEAS);
-    juego->familiares[1] = inicializar_familiar(terreno, FERB);
-    juego->familiares[2] = inicializar_familiar(terreno, CANDACE);
+void inicializar_familiares(juego_t* juego) {
+    familiar_t* familiares = juego->familiares;
+    int* tope = &(juego->tope_familiares);
+
+    *tope = 0;
+    familiares[(*tope)++] = inicializar_familiar(*juego, DERECHA, PHINEAS);
+    familiares[(*tope)++] = inicializar_familiar(*juego, IZQUIERDA, FERB);
+    familiares[(*tope)++] = inicializar_familiar(*juego, ARRIBA, CANDACE);
+    printf("%d", *tope);
+}
+void inicializar_topes(juego_t* juego) {
+    juego->tope_bombas = 0;
+    juego->tope_herramientas = 0;
+    juego->tope_familiares = 0;
 }

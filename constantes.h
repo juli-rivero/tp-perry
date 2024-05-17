@@ -2,8 +2,10 @@
 #define CONSTANTES_H
 
 #include <stdbool.h>
+#include <wchar.h>
 
 //INICIALIZACION
+    #define MAX_VIDAS 20
     extern const int I_VIDA;
     extern const int I_ENERGIA;
     extern const bool I_CAMUFLADO;
@@ -42,9 +44,9 @@
         extern const char GOLOSINAS;
 
 //ESTADISTICAS
-    extern char* VISTA_VIDA;
-    extern char* VISTA_ENERGIA;
-    extern char* VISTA_CAMUFLAJE;
+    extern wchar_t VISTA_VIDA;
+    extern wchar_t VISTA_ENERGIA;
+    extern wchar_t VISTA_AGENTE;
 
 //DETALLES
     enum Advertencia_timer_bomba {
@@ -53,8 +55,8 @@
     };
 
 //TERRENO
-    #define TER_FIL 20
-    #define TER_COL 20
+    #define TER_FIL 5
+    #define TER_COL 5
     extern const char VACIO;
     extern const char NO_VACIO;
 

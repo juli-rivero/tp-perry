@@ -32,6 +32,7 @@ typedef struct herramienta {
 
 typedef struct familiar {
     coordenada_t posicion;
+    char sentido; // 'A', 'S', 'D' o 'W'
     char inicial_nombre;
 } familiar_t;
 
@@ -43,6 +44,9 @@ typedef struct juego {
     int tope_herramientas;
     familiar_t familiares[MAX_FAMILIARES];
     int tope_familiares;
+    int movimientos;
+    coordenada_t* robots;
+    int cantidad_robots;
 } juego_t;
 
 /*

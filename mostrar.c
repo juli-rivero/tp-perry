@@ -1,8 +1,7 @@
 #include "mostrar.h"
 
-#include "mi_libreria.h"
-
 #include <stdio.h>
+#include <wchar.h>
 
 void mostrar_terreno(styled_char terreno[TER_FIL][TER_COL]) {
     printf("⌌");
@@ -23,9 +22,14 @@ void mostrar_terreno(styled_char terreno[TER_FIL][TER_COL]) {
 }
 
 void mostrar_stats(personaje_t perry) {
-    printf(" %s%d\t", VISTA_ENERGIA, perry.energia);
-    printf(" %s", repetir_str(VISTA_VIDA, perry.vida));
-    if(perry.camuflado)
-        printf("\t\t\t\t%s", VISTA_CAMUFLAJE);
+
+    wprintf(L" %lc%d\t", VISTA_ENERGIA, perry.energia);
+    
+    for (int i=0; i<perry.vida; i++)
+        wprintf(L"%lc",VISTA_VIDA);
+    
+    if(!perry.camuflado)
+        wprintf(L"\t\t\t\t%lc", VISTA_AGENTE);
+    
     printf("\n");
 }

@@ -17,11 +17,11 @@ clean:
 rebuild: clean all
 
 #Comprobar errores
-valgrind:
-	valgrind --leak-check=full ./$(TARGET)
+valgrind: $(TARGET)
+	valgrind --leak-check=full --track-origins=yes ./$(TARGET)
 
 #Jugar
-run:
+run: $(TARGET)
 	./$(TARGET)
 
 # Regla por defecto (all)

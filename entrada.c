@@ -1,7 +1,6 @@
 #include "entrada.h"
 
 #include "constantes.h"
-#include "mi_libreria.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,16 +34,4 @@ char recibir_accion() {
             break;
     }
     return accion;
-}
-
-void mover_arriba_abajo(int* coordenada, int sentido) {
-    *coordenada -= sentido;
-    if(*coordenada <= 0) *coordenada = 0;
-    if(*coordenada >= TER_FIL) *coordenada = TER_FIL - 1;
-}
-
-void mover_derecha_izquierda(int* coordenada, int sentido) {
-    *coordenada += sentido;
-    if(*coordenada <= 0) *coordenada = 0;
-    if(*coordenada >= TER_COL) *coordenada = TER_COL - 1;
 }

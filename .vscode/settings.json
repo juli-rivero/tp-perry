@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "tipos_de_datos.h": "c",
+        "colocar_en_terreno.h": "c",
+        "colores.h": "c",
+        "constantes.h": "c",
+        "ctype.h": "c",
+        "entrada.h": "c",
+        "mi_libreria.h": "c"
+    }
+}

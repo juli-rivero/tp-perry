@@ -47,9 +47,9 @@
         const char GOLOSINAS = 'G';
 
 // ESTADISTICAS
-    char* VISTA_VIDA = "❤";
-    char* VISTA_ENERGIA = "⚡";
-    char* VISTA_CAMUFLAJE = "ㅛ";
+    wchar_t VISTA_VIDA = L'❤';
+    wchar_t VISTA_ENERGIA = L'⚡';
+    wchar_t VISTA_AGENTE = L'ㅛ';
 
 // DETALLES
     /* En constantes.h 

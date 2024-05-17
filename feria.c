@@ -10,16 +10,14 @@
 
 #include <ctype.h>
 
+#include <stdio.h>
 void inicializar_juego(juego_t *juego)
 {
-    styled_char terreno[TER_FIL][TER_COL];
-    vaciar_terreno(terreno);
-
-    juego->perry = inicializar_personaje(terreno);
-
-    inicializar_bombas(terreno, juego);
-    inicializar_herramientas(terreno, juego);
-    inicializar_familiares(terreno, juego);
+    juego->perry = inicializar_personaje();
+    inicializar_topes(juego);
+    inicializar_bombas(juego);
+    inicializar_herramientas(juego);
+    inicializar_familiares(juego);
 }
 
 void imprimir_terreno(juego_t juego)

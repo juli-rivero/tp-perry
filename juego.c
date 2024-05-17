@@ -5,8 +5,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <locale.h>
 
 int main() {
+    setlocale(LC_ALL, ""); // Para UTF-8
     srand((unsigned)time(NULL)); // Se debe hacer solamente una vez.
     system("clear");
     printf("\v\v\v\v\v\v");
