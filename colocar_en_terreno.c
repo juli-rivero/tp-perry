@@ -1,67 +1,111 @@
 #include "colocar_en_terreno.h"
 
-#include "colores.h"
-#include "mi_libreria.h"
+#include "estilos.h"
+#include "jugada.h"
+#include "terreno.h"
 
 #include <string.h>
+#include <stdlib.h>
+#include <math.h>
 
-//POST: Coloca en la posicion del terreno recibida, el nombre recibido.
-void colocar_en_terreno(styled_char terreno[TER_FIL][TER_COL], coordenada_t posicion, char* estilo, char inicial) {
-    styled_char s_char = "";
-    strcpy(
-        terreno[posicion.fil][posicion.col], 
-        strcat(
-            strcat(
-                strcat(
-                    s_char,
-                    estilo
-                ), 
-                (styled_char) {inicial}
-            ), 
-            RESET
-        )
+void colocar_bombas(terreno_t terreno, bomba_t bombas[MAX_BOMBAS], int tope) {
+    for (int i = 0; i < tope; i++) {
+        if (!bombas[i].desactivada){
+            
+            styled_char_t* s_char = terreno[bombas[i].posicion.fil][bombas[i].posicion.col];
+            set_caracter(s_char, BOMBAS);
+
+            int timer = bombas[i].timer;
+            if (timer < ADVERT_ROJA) {
+                set_color_texto(s_char, ROJO);
+                set_estilo(s_char, BLINK_FAST);
+            } else if (timer < ADVERT_AMARILLA) {
+                set_estilo(s_char, BLINK_FAST);
+            } else {
+                set_estilo(s_char, BLINK_SLOW);
+            }
+        }
+    }
+}
+
+void colocar_herramientas(terreno_t terreno, herramienta_t herramientas[MAX_HERRAMIENTAS], int tope) {
+    for (int i = 0; i < tope; i++) {
+        styled_char_t* s_char = terreno[herramientas[i].posicion.fil][herramientas[i].posicion.col];
+
+        set_caracter(s_char, herramientas[i].tipo);
+        set_estilo(s_char, DIM);        
+    }
+}
+
+void colocar_familiares(terreno_t terreno, familiar_t familiares[MAX_FAMILIARES], int tope) {
+    for (int i = 0; i < tope; i++) {
+        styled_char_t* s_char = terreno[familiares[i].posicion.fil][familiares[i].posicion.col];
+
+        set_caracter(s_char, familiares[i].inicial_nombre);
+    }
+}
+
+void colocar_robots(terreno_t terreno, coordenada_t* robots, int tope) {
+    for (int i = 0; i < tope; i++) {
+        styled_char_t* s_char = terreno[robots[i].fil][robots[i].col];
+
+        set_caracter(s_char, ROBOTS);
+    }
+}
+
+void colocar_perry(terreno_t terreno, personaje_t perry) {
+    styled_char_t* s_char = terreno[perry.posicion.fil][perry.posicion.col];
+
+    set_caracter(s_char, PERRY);
+    set_estilo(s_char, BOLD);
+}
+
+
+
+void estilo_cercania_familia(terreno_t terreno, juego_t juego) {
+    pintar_cercania(
+        terreno,
+        (coordenada_t[]) {
+            juego.familiares[0].posicion,
+            juego.familiares[1].posicion,
+            juego.familiares[2].posicion,
+        },
+        juego.tope_familiares,
+        DIST_FAMILIA,
+        ROJO,
+        FONDO_BRILLANTE
     );
 }
 
-void colocar_bombas(styled_char terreno[TER_FIL][TER_COL], int tope, bomba_t bombas[MAX_BOMBAS]) {
-    for (int i = 0; i < tope; i++) {
-        int timer = bombas[i].timer;
-        colocar_en_terreno(
-            terreno, 
-            bombas[i].posicion, 
-            (timer < ADVERT_ROJA) ? ROJO_T : ((timer < ADVERT_AMARILLA) ? AMARILLO_T : ""), 
-            BOMBAS
-        );
-    }
+void estilo_cercania_robots(terreno_t terreno, juego_t juego) {
+    bool modo_agente = !(juego.perry.camuflado);
+    pintar_cercania(
+        terreno,
+        juego.robots,
+        juego.cantidad_robots,
+        DIST_ROBOTS,
+        modo_agente ? AMARILLO : ROJO,
+        modo_agente ? FONDO_NORMAL : FONDO_BRILLANTE
+    );
 }
 
-void colocar_herramientas(styled_char terreno[TER_FIL][TER_COL], int tope, herramienta_t herramientas[MAX_HERRAMIENTAS]) {
-    for (int i = 0; i < tope; i++) {
-        colocar_en_terreno(
-            terreno, 
-            herramientas[i].posicion, 
-            "", 
-            herramientas[i].tipo
-        );
-    }
-}
+/* void estilo_explosion(styled_char terreno[TER_FIL][TER_COL]) {
+    for (int i=0; i<TER_FIL; i++)
+        for (int j=0; j<TER_COL; j++)
+            colocar_estilo(terreno, (coordenada_t) { i, j }, ROJO_F, (j == TER_COL - 1));
+} */
 
-void colocar_familiares(styled_char terreno[TER_FIL][TER_COL], int tope, familiar_t familiares[MAX_FAMILIARES]) {
-    for (int i = 0; i < tope; i++) {
-        colocar_en_terreno(
-            terreno, 
-            familiares[i].posicion, 
-            "", 
-            familiares[i].inicial_nombre
-        );
-    }
-}
+void colocar_estilos(terreno_t terreno, juego_t juego) {
+    /* for (int i = 0; i < juego.tope_bombas; i++) {
+        if ((!juego.bombas[i].desactivada) && (juego.bombas[i].timer == 0)) {
+            estilo_explosion(terreno);
+            return;
+        }
+    } */
 
-void colocar_perry(styled_char terreno[TER_FIL][TER_COL], personaje_t perry) {
-    colocar_en_terreno(
-        terreno, 
-        perry.posicion, 
-        STYLE_BOLD STYLE_UNDERLINE, 
-        PERRY
-    ); 
+    estilo_cercania_robots(terreno, juego);
+    
+    if (!juego.perry.camuflado) //si esta modo agente
+        estilo_cercania_familia(terreno, juego);
+
 }

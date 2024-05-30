@@ -6,6 +6,23 @@
         "constantes.h": "c",
         "ctype.h": "c",
         "entrada.h": "c",
-        "mi_libreria.h": "c"
+        "mi_libreria.h": "c",
+        "jugada.h": "c",
+        "funciones_objetos.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "obstaculos.h": "c",
+        "inicializar.h": "c",
+        "estilos.h": "c",
+        "terreno.h": "c",
+        "mostrar.h": "c",
+        "stdbool.h": "c",
+        "conio.h": "c",
+        "algorithm": "c",
+        "cursor.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c"
     }
 }

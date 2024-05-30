@@ -3,10 +3,9 @@
 
 #include "feria.h"
 #include "constantes.h"
-#include "tipos_de_datos.h"
 
 
-personaje_t inicializar_personaje();
+personaje_t crear_personaje();
 
 void inicializar_topes(juego_t* juego);
 
@@ -15,5 +14,13 @@ void inicializar_bombas(juego_t* juego);
 void inicializar_herramientas(juego_t* juego);
 
 void inicializar_familiares(juego_t* juego);
+
+void inicializar_robots(juego_t* juego);
+
+void liberar_memoria(juego_t* juego);
+
+void agregar_robot(juego_t* juego);
+
+void eliminar_robot(juego_t* juego, int indice);
 
 #endif /* INICIALIZAR_H */

@@ -35,16 +35,21 @@
     const char NO_VALIDO = '-';
 
 // CONVENCIONES - estan como cadena para despues poder usarlos con strcat (y usar colores)
-    // Nombres
-        const char PERRY = 'P';
-        const char PHINEAS = 'H';
-        const char FERB = 'F';
-        const char CANDACE = 'C';
-    // Obstaculos
-        const char BOMBAS = 'B';
-    // Herramientas
-        const char SOMBREROS = 'S';
-        const char GOLOSINAS = 'G';
+    /* En constantes.h 
+    enum Iniciales_falimia {
+        PERRY = 'P';
+        PHINEAS = 'H',
+        FERB = 'F',
+        CANDACE = 'C',
+    };
+    enum Iniciales_obstaculos {
+        ROBOTS = 'R',
+        BOMBAS = 'B',
+    };
+    enum Iniciales_herramientas {
+        SOMBREROS = 'S',
+        GOLOSINAS = 'G',
+    }; */
 
 // ESTADISTICAS
     wchar_t VISTA_VIDA = L'❤';

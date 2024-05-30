@@ -3,45 +3,54 @@
 
 #include <stdbool.h>
 #include <wchar.h>
+#include "estilos.h"
 
 //INICIALIZACION
-    #define MAX_VIDAS 20
     extern const int I_VIDA;
     extern const int I_ENERGIA;
     extern const bool I_CAMUFLADO;
     extern const int I_CANT_BOMBAS;
-    enum Timer_bomba {
+    enum timer_bomba {
         TIEMPO_MIN = 50,
         TIEMPO_MAX = 300,
     };
     extern const int I_CANT_SOMBREROS;
     extern const int I_CANT_GOLOSINAS;
     extern const int I_CANT_FAMILIA;
+    typedef enum distancia_respecto_perry {
+        DIST_FAMILIA = 1,
+        DIST_ROBOTS = 2,
+        DIST_BOMBA = 2 * 20 // Para que ocupe todo el mapa
+    } distancia_respecto_perry_t;
 
 //ACCIONES - con 'const enum' para que puedan usarse en el switch.
-    enum Direcciones {
+    enum direcciones {
         ARRIBA = 'W',
         ABAJO = 'S',
         DERECHA = 'D',
         IZQUIERDA = 'A',
     };
 
-    enum Habilidades {
+    enum habilidades {
         CAMUFLARSE = 'Q',
     };
     extern const char NO_VALIDO;
 
 //CONVENCIONES
-    //Nombres
-        extern const char PERRY;
-        extern const char PHINEAS;
-        extern const char FERB;
-        extern const char CANDACE;
-    //Obstaculos
-        extern const char BOMBAS;
-    //Herramientas
-        extern const char SOMBREROS;
-        extern const char GOLOSINAS;
+    enum iniciales_falimia {
+        PERRY = 'P',
+        PHINEAS = 'H',
+        FERB = 'F',
+        CANDACE = 'C',
+    };
+    enum iniciales_obstaculos {
+        ROBOTS = 'R',
+        BOMBAS = 'B',
+    };
+    enum iniciales_herramientas {
+        SOMBREROS = 'S',
+        GOLOSINAS = 'G',
+    };
 
 //ESTADISTICAS
     extern wchar_t VISTA_VIDA;
@@ -49,19 +58,22 @@
     extern wchar_t VISTA_AGENTE;
 
 //DETALLES
-    enum Advertencia_timer_bomba {
+    enum advertencia_timer_bomba {
         ADVERT_AMARILLA = 100,
         ADVERT_ROJA = 25
     };
 
 //TERRENO
-    #define TER_FIL 5
-    #define TER_COL 5
+    enum dimensiones_terreno {
+        TER_FIL = 20,
+        TER_COL = 20,
+    };
+    typedef styled_char_t* terreno_t[TER_FIL][TER_COL];
     extern const char VACIO;
     extern const char NO_VACIO;
 
 //ESTADO JUEGO
-    enum Estado_juego {
+    enum estado_juego {
         GAME_OVER = -1,
         EN_JUEGO = 0,
         GANADO = 1
