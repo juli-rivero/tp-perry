@@ -24,7 +24,7 @@ int main() {
             imprimir_terreno(juego);
 
             char accion = recibir_accion();
-            if (accion == NO_VALIDO)
+            if (accion == false)
                 continue;
                 
             realizar_jugada(&juego, accion);

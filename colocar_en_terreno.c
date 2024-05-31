@@ -45,7 +45,9 @@ void colocar_familiares(terreno_t terreno, familiar_t familiares[MAX_FAMILIARES]
     }
 }
 
+#include <stdio.h>
 void colocar_robots(terreno_t terreno, coordenada_t* robots, int tope) {
+    printf("%d", tope);
     for (int i = 0; i < tope; i++) {
         styled_char_t* s_char = terreno[robots[i].fil][robots[i].col];
 
@@ -63,13 +65,16 @@ void colocar_perry(terreno_t terreno, personaje_t perry) {
 
 
 void estilo_cercania_familia(terreno_t terreno, juego_t juego) {
+    if (juego.perry.camuflado) //si no esta modo agente
+        return;
+
+    coordenada_t f_posiciones[MAX_FAMILIARES];
+    for (int i = 0; i < juego.tope_familiares; i++)
+        f_posiciones[i] = juego.familiares[i].posicion;
+    
     pintar_cercania(
         terreno,
-        (coordenada_t[]) {
-            juego.familiares[0].posicion,
-            juego.familiares[1].posicion,
-            juego.familiares[2].posicion,
-        },
+        f_posiciones,
         juego.tope_familiares,
         DIST_FAMILIA,
         ROJO,
@@ -105,7 +110,6 @@ void colocar_estilos(terreno_t terreno, juego_t juego) {
 
     estilo_cercania_robots(terreno, juego);
     
-    if (!juego.perry.camuflado) //si esta modo agente
         estilo_cercania_familia(terreno, juego);
 
 }

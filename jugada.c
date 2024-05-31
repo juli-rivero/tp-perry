@@ -3,7 +3,6 @@
 #include "constantes.h"
 #include "terreno.h"
 #include "funciones_objetos.h"
-#include "mi_libreria.h"
 #include "obstaculos.h"
 #include "inicializar.h"
 
@@ -88,7 +87,7 @@ void comprobar_posicion(juego_t* juego) {
     for (int i = 0; i < juego->cantidad_robots; i++)
         if (calcular_distancia(p_posicion, juego->robots[i]) <= DIST_ROBOTS) {
             if (!juego->perry.camuflado && juego->perry.energia > 5) { //Si esta en modo agente 
-                eliminar_robot(juego, i);
+                eliminar_robot(&(juego->robots), &(juego->cantidad_robots), i);
                 juego->perry.energia -= 5;
             } else {
                 perder_vida(juego);

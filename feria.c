@@ -36,6 +36,8 @@ void imprimir_terreno(juego_t juego)
 
     colocar_estilos(terreno, juego);
     mostrar_terreno(terreno);
+
+    destruir_terreno(terreno);
 }
 
 void realizar_jugada(juego_t *juego, char accion) {
@@ -53,9 +55,9 @@ void realizar_jugada(juego_t *juego, char accion) {
             agregar_robot(juego);
         decrementar_timer_bombas(juego);
         mover_familia(juego->familiares, juego->tope_familiares);
-        comprobar_posicion(juego);
         break;
     }
+    comprobar_posicion(juego);
 }
 
 bool bombas_desactivadas(int tope, bomba_t bombas[MAX_BOMBAS]) {

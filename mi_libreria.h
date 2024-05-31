@@ -1,8 +1,7 @@
 #ifndef MI_LIBRERIA_H
 #define MI_LIBRERIA_H
 
-#include "feria.h"
-#include "constantes.h"
+//#include "constantes.h"
 
 typedef unsigned long size_t;
 
@@ -17,11 +16,8 @@ int rand_minI_maxI(int min_inclusive, int max_inclusive);
 //POST: intercambia dos variables
 void swap(void* elemento1, void* elemento2, size_t size_elemento);
 
-//POST: Calcula la distancia manhatan entre dos posiciones.
-int calcular_distancia(coordenada_t pos1, coordenada_t pos2);
-
-//POST: modifica filtrados para que sea un arreglo de longitud TER_FIL donde cada elemento sea un arreglo con las coordenadas que complen la condicion de que la distancia manhatan de cualquier coordenada con las coordenadas pasadas sean menor a la distancia especificada.
-void filtrar_coordenadas_segun_distancia(int distancia, coordenada_t* posiciones, int tope_posiciones, coordenada_t* filtrados[TER_FIL], int topes_filtrados[TER_FIL]);
+//POST: elimina del arreglo el elemento del indice especificado.
+void eliminar_elemento(void* vector, size_t size_elemento, int* tope, size_t indice);
 
 void centrar_verticalmente(int filas_contenido);
 

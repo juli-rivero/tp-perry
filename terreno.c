@@ -21,11 +21,15 @@ char visualizacion_de_posicion(juego_t juego, coordenada_t posicion) {
     for (int i = 0; i < juego.tope_familiares; i++)
         if(son_pos_iguales(juego.familiares[i].posicion, posicion))
             return juego.familiares[i].inicial_nombre;
+
+    for (int i = 0; i < juego.cantidad_robots; i++)
+        if(son_pos_iguales(juego.robots[i], posicion))
+            return ROBOTS;
     
     if (son_pos_iguales(juego.perry.posicion, posicion))
         return PERRY;
 
-    return VACIO;
+    return false;
 }
 coordenada_t agarrar_rand_posicion(juego_t juego) {
     coordenada_t posicion;
@@ -33,7 +37,7 @@ coordenada_t agarrar_rand_posicion(juego_t juego) {
     do {
         posicion.fil = rand_index(TER_FIL);
         posicion.col = rand_index(TER_COL);
-    } while ((visualizacion_de_posicion(juego, posicion) != VACIO) && (++contador < MAXIMO_BUCLE));
+    } while ((visualizacion_de_posicion(juego, posicion)) && (++contador < MAXIMO_BUCLE));
 
     if (contador >= MAXIMO_BUCLE)  {
         fprintf(stderr, "Terreno insuficiente para la cantidad de objetos");

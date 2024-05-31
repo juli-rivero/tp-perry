@@ -8,6 +8,30 @@ bool son_pos_iguales(coordenada_t pos1, coordenada_t pos2) {
     return (pos1.fil == pos2.fil && pos1.col == pos2.col);
 }
 
+
+int calcular_distancia(coordenada_t pos1, coordenada_t pos2) {
+    return abs(pos1.fil - pos2.fil) + abs(pos1.col - pos2.col);
+}
+
+void filtrar_coordenadas_segun_distancia(int distancia, coordenada_t* posiciones, int tope_posiciones, coordenada_t* filtrados[TER_FIL], int topes_filtrados[TER_FIL]) {
+    for (int i=0; i < TER_FIL; i++) {
+        topes_filtrados[i] = 0;
+        for (int j=0; j < TER_COL; j++) {
+            for (int k=0; k < tope_posiciones; k++) {
+                if (calcular_distancia((coordenada_t){ i, j }, posiciones[k]) <= distancia) {
+                    (topes_filtrados[i])++;
+                    filtrados[i] = realloc(filtrados[i], sizeof(coordenada_t) * (size_t) topes_filtrados[i]);
+                    if (filtrados[i] == NULL) {
+                        printf("ERROR REALLOC");
+                        return;
+                    }
+                    filtrados[i][topes_filtrados[i] - 1] = (coordenada_t){ i, j };
+                }
+            }
+        }
+    }
+}
+
 coordenada_t obtener_posicion(void* objeto, tipo_de_objeto_t tipo_de_objeto, size_t offset) {
     switch (tipo_de_objeto)
     {
@@ -52,13 +76,7 @@ size_t sizeof_tipo_de_objeto(tipo_de_objeto_t tipo_de_objeto) {
     return 0;
 }
 
-void eliminar_objeto(void* objeto, tipo_de_objeto_t tipo_de_objeto, int* tope, size_t indice) {
-    (*tope)--;
-    size_t size = sizeof_tipo_de_objeto(tipo_de_objeto);
-    swap(objeto + (size * indice), objeto + (size * ((size_t) *tope)), size);
-}
-
 void eliminar_objeto_segun_posicion(void* objeto, tipo_de_objeto_t tipo_de_objeto, int* tope, coordenada_t posicion) {
     size_t indice = encontrar_indice_segun_posicion(objeto, tipo_de_objeto, *tope, posicion);
-    eliminar_objeto(objeto, tipo_de_objeto, tope, indice);
+    eliminar_elemento(objeto, sizeof_tipo_de_objeto(tipo_de_objeto), tope, indice);
 }

@@ -59,7 +59,7 @@ char recibir_accion() {
         
         reset_estilo();
 
-        return NO_VALIDO;
+        return false;
     }
     
 }

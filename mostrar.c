@@ -53,8 +53,10 @@ void mostrar_stats(personaje_t perry) {
     
     printf("┃");
     cursor(GUARDAR_POSICION_CURSOR);
-    for (int i = 0; i < TER_COL * 2; i++)
+    for (int i = 0; i < TER_COL * 2 + 1; i++)
         printf(" ");
+    printf("┃");
+    printf("\n");
 
     cursor(RESTAURAR_POSICION_CURSOR);
     printf("%lc%d\t", VISTA_ENERGIA, perry.energia);
@@ -69,13 +71,9 @@ void mostrar_stats(personaje_t perry) {
     
     cursor(RESTAURAR_POSICION_CURSOR);
     mover_cursor_n_veces(MOVER_CURSOR_DERECHA, TER_COL * 2 - 1);
-    if(!perry.camuflado) {
+    if(!perry.camuflado)
         printf("%lc", VISTA_AGENTE);
-    }
-    
-    
-    printf("┃");
-    printf("\n");
+    mover_cursor_n_veces(MOVER_CURSOR_INICIO_LINEA_ABAJO, 1);   
 }
 
 void imprimir_mensaje_final(juego_t juego) {

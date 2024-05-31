@@ -21,6 +21,6 @@ void liberar_memoria(juego_t* juego);
 
 void agregar_robot(juego_t* juego);
 
-void eliminar_robot(juego_t* juego, int indice);
+void eliminar_robot(coordenada_t** robots, int* tope, int indice);
 
 #endif /* INICIALIZAR_H */

@@ -7,6 +7,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include "cursor.h"
+#include "estilos.h"
 
 int rand_index(int max_exclusive)
 {
@@ -31,27 +32,15 @@ void swap(void* elemento1, void* elemento2, size_t size_elemento) {
     free(aux);
 }
 
-int calcular_distancia(coordenada_t pos1, coordenada_t pos2) {
-    return abs(pos1.fil - pos2.fil) + abs(pos1.col - pos2.col);
-}
-
-void filtrar_coordenadas_segun_distancia(int distancia, coordenada_t* posiciones, int tope_posiciones, coordenada_t* filtrados[TER_FIL], int topes_filtrados[TER_FIL]) {
-    for (int i=0; i < TER_FIL; i++) {
-        topes_filtrados[i] = 0;
-        for (int j=0; j < TER_COL; j++) {
-            for (int k=0; k < tope_posiciones; k++) {
-                if (calcular_distancia((coordenada_t){ i, j }, posiciones[k]) <= distancia) {
-                    (topes_filtrados[i])++;
-                    filtrados[i] = realloc(filtrados[i], sizeof(coordenada_t) * (size_t) topes_filtrados[i]);
-                    if (filtrados[i] == NULL) {
-                        printf("ERROR REALLOC");
-                        return;
-                    }
-                    filtrados[i][topes_filtrados[i] - 1] = (coordenada_t){ i, j };
-                }
-            }
-        }
-    }
+void eliminar_elemento(void* vector, size_t size_elemento, int* tope, size_t indice) {
+    if (*tope == 0)
+        return;
+    (*tope)--;
+    swap(
+        vector + (size_elemento * indice), 
+        vector + (size_elemento * ((size_t) *tope)), 
+        size_elemento
+        );
 }
 
 void centrar_verticalmente(int filas_contenido) {
