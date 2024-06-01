@@ -19,29 +19,6 @@ int rand_minI_maxI(int min_inclusive, int max_inclusive)
     return rand() % (max_inclusive - min_inclusive + 1) + min_inclusive;
 }
 
-void swap(void* elemento1, void* elemento2, size_t size_elemento) {
-    void* aux = malloc(size_elemento); 
-    if (aux == NULL){
-        printf("ERROR");
-        return;
-    }
-    
-    memcpy(aux, elemento1, size_elemento);
-    memcpy(elemento1, elemento2, size_elemento);
-    memcpy(elemento2, aux, size_elemento);
-    free(aux);
-}
-
-void eliminar_elemento(void* vector, size_t size_elemento, int* tope, size_t indice) {
-    if (*tope == 0)
-        return;
-    (*tope)--;
-    swap(
-        vector + (size_elemento * indice), 
-        vector + (size_elemento * ((size_t) *tope)), 
-        size_elemento
-        );
-}
 
 void centrar_verticalmente(int filas_contenido) {
     struct winsize w;

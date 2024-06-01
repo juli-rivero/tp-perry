@@ -68,7 +68,8 @@ void mostrar_stats(personaje_t perry) {
         for (int i=0; i<perry.vida; i++)
             printf("%lc",VISTA_VIDA);
     reset_estilo();
-    
+
+
     cursor(RESTAURAR_POSICION_CURSOR);
     mover_cursor_n_veces(MOVER_CURSOR_DERECHA, TER_COL * 2 - 1);
     if(!perry.camuflado)

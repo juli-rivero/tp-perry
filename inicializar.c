@@ -3,9 +3,7 @@
 #include "terreno.h"
 #include "mi_libreria.h"
 #include "funciones_objetos.h"
-
-#include <stdio.h>
-#include <stdlib.h>
+#include "funciones_array.h"
 
 personaje_t crear_personaje() {
     return (personaje_t) {
@@ -73,25 +71,10 @@ void inicializar_robots(juego_t* juego) {
     juego->cantidad_robots=0;
     juego->robots = NULL;
 }
-void destruir_robots(coordenada_t** robots, int* tope) {
-    *tope = 0;
-    free(*robots);
-    *robots = NULL;
-}
 
 void liberar_memoria(juego_t* juego) {
-    destruir_robots(&(juego->robots), &(juego->cantidad_robots));
-}
-
-void push_robot(coordenada_t** robots, int* tope) {
-    (*tope)++;
-    coordenada_t* aux = realloc(*robots, sizeof(coordenada_t) * (size_t) (*tope));
-    if (!aux) {
-        free(*robots);
-        fprintf(stderr, "ERROR REALLOC");
-        exit(EXIT_FAILURE);
-    }
-    *robots = aux;
+    //no se puede hacer pasaje implicito para punteros multiples :'(
+    liberar_vector_dinamico((void**) &(juego->robots), &(juego->cantidad_robots));
 }
 
 void agregar_robot(juego_t* juego) {
@@ -99,23 +82,20 @@ void agregar_robot(juego_t* juego) {
     do {
         pos_ultimo_robot = agarrar_rand_posicion(*juego);
     } while (calcular_distancia(pos_ultimo_robot, juego->perry.posicion) <= DIST_ROBOTS);
-
-    push_robot(&(juego->robots), &(juego->cantidad_robots));
-    juego->robots[juego->cantidad_robots - 1] = pos_ultimo_robot;
+    
+    agregar_elemento_dinamico(
+        (void**) &(juego->robots), 
+        sizeof(coordenada_t), 
+        &(juego->cantidad_robots), 
+        &pos_ultimo_robot
+        );
 }
 
 void eliminar_robot(coordenada_t** robots, int* tope, int indice) {
-    eliminar_elemento(*robots, sizeof(coordenada_t), tope, (size_t) indice);
-    //Liberar espacio no usado
-    if ((*tope) == 0) {
-        destruir_robots(robots, tope);
-    } else {
-        coordenada_t* aux = realloc(*robots, sizeof(coordenada_t) * (size_t) (*tope));
-        if (!aux) {
-            free(*robots);
-            fprintf(stderr, "ERROR REALLOC");
-            exit(EXIT_FAILURE);
-        }
-        *robots = aux;
-    }
+    eliminar_elemento_dinamico(
+        (void**) robots, 
+        sizeof(coordenada_t), 
+        tope, 
+        (size_t) indice
+        );
 }

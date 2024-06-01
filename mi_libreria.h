@@ -13,12 +13,6 @@ int rand_index(int max_exclusive);
 // POST: devuelve un numero entre [min_inclusive , max_inclusive].
 int rand_minI_maxI(int min_inclusive, int max_inclusive);
 
-//POST: intercambia dos variables
-void swap(void* elemento1, void* elemento2, size_t size_elemento);
-
-//POST: elimina del arreglo el elemento del indice especificado.
-void eliminar_elemento(void* vector, size_t size_elemento, int* tope, size_t indice);
-
 void centrar_verticalmente(int filas_contenido);
 
 void centrar_horizontalmente(int columnas_contenido);

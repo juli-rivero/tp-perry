@@ -1,5 +1,6 @@
 #include "funciones_objetos.h"
-#include "mi_libreria.h"
+
+#include "funciones_array.h"
 
 #include <stdio.h>
 #include <stdlib.h>
