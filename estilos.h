@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-typedef enum {
+typedef enum texto_atributo {
     NORMAL          = '0',
     BOLD            = '1',
     DIM             = '2',
@@ -16,12 +16,12 @@ typedef enum {
     STRIKETHROUGH   = '9',
 } texto_atributo_t;
 
-typedef enum {
+typedef enum modo_de_fondo {
     FONDO_NORMAL = 4,
     FONDO_BRILLANTE = 10,
 } modo_fondo_t;
 
-typedef enum {
+typedef enum modo_de_texto {
     TEXTO_NORMAL = '3',
     TEXTO_BRILLANTE = '9',
 } modo_texto_t;
@@ -39,8 +39,8 @@ typedef enum {
 } color_t;
 
 // Para poder estelizar un caracter
-struct styled_c;
-typedef struct styled_c styled_char_t;
+struct styled_char;
+typedef struct styled_char styled_char_t;
 
 
 // Crea un puntero a styled_char_t. Este puntero luego debe ser destruido llamando a destruir_styled_char(). En caso de fallar retorna NULL
@@ -70,9 +70,5 @@ void imprimir_styled_char(styled_char_t* s_char);
 void imprimir_estilo(texto_atributo_t atributo, color_t color_texto, modo_texto_t modo_texto, color_t color_fondo, modo_fondo_t modo_fondo);
 
 void reset_estilo();
-
-void rellenar_pantalla();
-
-void rellenar_linea();
 
 #endif /* ESTILOS_H */

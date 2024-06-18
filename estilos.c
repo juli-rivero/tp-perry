@@ -1,12 +1,7 @@
 #include "estilos.h"
-#include <string.h>
+
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include "mi_libreria.h"
-#include "cursor.h"
-
 
 #ifndef SECUENCIA
 #define SECUENCIA "\033[" // también puede ser \x1b[
@@ -24,7 +19,7 @@
 #define RESET "\033[0m"
 #endif /* RESET */
 
-struct styled_c {
+struct styled_char {
     char caracter;
     texto_atributo_t atributo;
     color_t color_texto;
@@ -120,15 +115,4 @@ void imprimir_styled_char(styled_char_t* s_char) {
     printf("%c", s_char->caracter);
 
     if (s_char->reset) reset_estilo();
-}
-
-
-
-void rellenar_pantalla() {
-    mover_cursor_inicio();
-    printf(SECUENCIA "J");
-}
-
-void rellenar_linea() {
-    printf(SECUENCIA "K");
 }

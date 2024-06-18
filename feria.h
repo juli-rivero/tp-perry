@@ -73,6 +73,10 @@ void imprimir_terreno(juego_t juego);
  * --> 1 si es ganado
  * --> -1 si es perdido
  * --> 0 si se sigue jugando
+ * 
+ * En caso de ganado o perdido esta función liberará la memoria reservada a lo largo del juego.
+ * Queda como responsabilidad del usuario no llamar a esta función dos veces en caso de que se
+ * devuelva un valor distinto de 0 (para no hacer doble liberación).
  */
 int estado_juego(juego_t juego);
 

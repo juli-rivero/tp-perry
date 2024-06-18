@@ -18,7 +18,7 @@ rebuild: clean all
 
 #Comprobar errores
 valgrind: $(TARGET)
-	valgrind --leak-check=full --track-origins=yes ./$(TARGET)
+	valgrind -s --leak-check=full --track-origins=yes ./$(TARGET)
 
 #Jugar
 run: $(TARGET)
